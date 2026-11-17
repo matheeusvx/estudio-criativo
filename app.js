@@ -529,6 +529,9 @@ function mountBreakdown(el, { title, series, data, selected, link = '#analytics'
   }
 
   function place() {
+    const off = st.hov === null && !st.kb;
+    col.classList.toggle('hide', off); tip.classList.toggle('hide', off);
+    if (off) return;
     const a = st.hov ?? st.sel, d = data[a];
     const { w, bw, x } = G;
     const cx = x(a) - PAD, cw = bw + 2 * PAD;
@@ -565,14 +568,16 @@ function mountBreakdown(el, { title, series, data, selected, link = '#analytics'
   }
   const kick = () => { if (!st.raf) st.raf = requestAnimationFrame(frame); };
 
-  const select = (i) => { st.sel = Math.min(Math.max(i, 0), n - 1); st.hov = null; place(); };
+  const select = (i) => { st.sel = Math.min(Math.max(i, 0), n - 1); place(); };
+  daysEl.addEventListener('focusin', () => { st.kb = true; place(); });
+  daysEl.addEventListener('focusout', () => { st.kb = false; place(); });
   daysEl.addEventListener('pointerover', (e) => { const b = e.target.closest('.bd-day'); if (b) { st.hov = +b.dataset.i; place(); } });
   plot.addEventListener('pointerleave', () => { if (st.hov !== null) { st.hov = null; place(); } });
   daysEl.addEventListener('click', (e) => { const b = e.target.closest('.bd-day'); if (b) select(+b.dataset.i); });
   daysEl.addEventListener('keydown', (e) => {
     const next = { ArrowRight: st.sel + 1, ArrowDown: st.sel + 1, ArrowLeft: st.sel - 1, ArrowUp: st.sel - 1, Home: 0, End: n - 1 }[e.key];
     if (next === undefined) return;
-    e.preventDefault(); select(next); daysEl.children[st.sel]?.focus();
+    e.preventDefault(); st.hov = null; select(next); daysEl.children[st.sel]?.focus();
   });
   statEls.forEach((b, k) => b.addEventListener('click', () => {
     const key = series[k].key;
@@ -595,8 +600,7 @@ function mountBreakdown(el, { title, series, data, selected, link = '#analytics'
   if (!reduce) {
     kick();
     const shownAt = 250 + st.sel * 45 + 1100 * 0.55;
-    setTimeout(() => col.classList.remove('pre'), shownAt);
-    setTimeout(() => tip.classList.remove('pre'), shownAt + 250);
+    setTimeout(() => { col.classList.remove('pre'); tip.classList.remove('pre'); }, shownAt);
   }
 }
 

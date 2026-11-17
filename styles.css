@@ -356,6 +356,9 @@ td .tg { font-size: 12px; color: var(--muted); }
 }
 .bd-tip.pre { opacity: 0; transform: translateY(6px) scale(.94); }
 .bd-col.no-tr, .bd-tip.no-tr { transition: none; }
+.bd-col.hide { opacity: 0; transform: scaleY(.6); }
+.bd-tip.hide { opacity: 0; transform: translateY(4px) scale(.96); }
+.bd-col { transition-property: left, width, transform, opacity; transition-duration: .55s, .55s, .35s, .25s; }
 .bd-tip .d { color: #8b9ab3; }
 .bd-tip .r { display: flex; align-items: center; gap: 6px; transition: opacity .3s; }
 .bd-tip .r.off { opacity: .4; }
