@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Estúdio Criativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="shell" id="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="logo">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 7 8 5-8 5V7Z" fill="currentColor"/></svg>
+        </div>
+        <div class="brand-txt lbl"><b>Estúdio</b><small>Gestor criativo</small></div>
+      </div>
+
+      <div class="side-label">Menu</div>
+      <nav class="side-nav" id="nav"></nav>
+
+      <div class="side-label">Canais</div>
+      <div class="side-channels" id="sideChannels"></div>
+
+      <div class="side-bottom">
+        <button class="side-link" id="btnFollowers"><span data-icon="users"></span><span class="lbl">Seguidores</span></button>
+        <button class="side-link" id="btnSettings"><span data-icon="sliders"></span><span class="lbl">Configurações</span></button>
+        <button class="side-link" id="btnCollapse"><span data-icon="panel"></span><span class="lbl">Recolher</span></button>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim"></div>
+
+    <div class="content">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="btnMenu" aria-label="Abrir menu"><span data-icon="menu"></span></button>
+        <div class="crumb" id="crumb"></div>
+        <div class="top-actions">
+          <span class="today-chip"><span data-icon="calendar"></span><span id="today"></span></span>
+          <button class="btn btn-primary" id="btnNew"></button>
+        </div>
+      </header>
+      <main id="main"></main>
+    </div>
+  </div>
+  <div id="modal-root"></div>
+  <div id="tip" role="tooltip"></div>
+  <div id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
